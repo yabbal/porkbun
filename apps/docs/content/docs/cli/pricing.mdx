@@ -1,0 +1,25 @@
+---
+title: Pricing
+description: Get TLD pricing information
+---
+
+## All TLDs
+
+```bash title="Terminal"
+porkbun pricing
+porkbun pricing --format table
+```
+
+## Specific TLD
+
+```bash title="Terminal"
+porkbun pricing --tld com
+porkbun pricing --tld dev --format table
+```
+
+## Combine with jq
+
+```bash title="Terminal"
+porkbun pricing | jq '.pricing.com'
+porkbun pricing | jq '[.pricing | to_entries[] | select(.value.registration | tonumber < 10)] | length'
+```

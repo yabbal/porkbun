@@ -1,4 +1,4 @@
 {
 	"title": "CLI",
-	"pages": ["index", "domain", "dns", "ssl"]
+	"pages": ["index", "domain", "dns", "dnssec", "ssl", "pricing"]
 }

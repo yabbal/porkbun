@@ -1,4 +1,4 @@
-# Contributing to Porkbun CLI
+# Contributing to Porkbun
 
 Thanks for your interest in contributing! Contributions are welcome.
 
@@ -14,6 +14,9 @@ pnpm install
 
 # Build all packages
 pnpm build
+
+# Run tests
+pnpm test
 ```
 
 ## Project structure
@@ -22,6 +25,7 @@ pnpm build
 porkbun/
 ├── packages/porkbun-sdk/   # TypeScript SDK (published on npm)
 ├── packages/porkbun-cli/   # CLI tool (published on npm, depends on porkbun-sdk)
+├── apps/docs/              # Documentation site (Fumadocs + Next.js)
 └── turbo.json              # Turborepo config
 ```
 
@@ -37,22 +41,27 @@ porkbun/
    - Arrow functions preferred
    - Formatted with [Biome](https://biomejs.dev/)
 
-3. **Commit your changes** using conventional commits:
+3. **Run tests** to make sure nothing is broken:
+   ```bash
+   pnpm test
+   ```
+
+4. **Commit your changes** using conventional commits:
    ```bash
    pnpm commit    # Interactive conventional commit prompt
    ```
 
    Git hooks ([Lefthook](https://github.com/evilmartians/lefthook)) run automatically:
-   - **pre-commit** — Biome lint on staged files
+   - **pre-commit** — Biome lint + typecheck on staged files
    - **commit-msg** — validates conventional commit format ([commitlint](https://commitlint.js.org/))
-   - **pre-push** — build
+   - **pre-push** — build + tests
 
-4. **Add a changeset** if your change affects a published package:
+5. **Add a changeset** if your change affects a published package:
    ```bash
    pnpm changeset
    ```
 
-5. **Open a pull request** against `main`.
+6. **Open a pull request** against `main`.
 
 ## Commit conventions
 

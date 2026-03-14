@@ -1,0 +1,22 @@
+---
+title: DNSSEC
+description: Manage DNSSEC DS records
+---
+
+## List records
+
+```bash title="Terminal"
+porkbun dnssec list example.com
+```
+
+## Create a record
+
+```bash title="Terminal"
+porkbun dnssec create example.com --key-tag 12345 --alg 13 --digest-type 2 --digest abc123
+```
+
+## Delete a record
+
+```bash title="Terminal"
+porkbun dnssec delete example.com --key-tag 12345
+```
