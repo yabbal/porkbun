@@ -27,8 +27,8 @@ npm install -g porkbun-cli
 ### From source
 
 ```bash
-git clone https://github.com/yabbal/porkbun-cli.git
-cd porkbun-cli
+git clone https://github.com/yabbal/porkbun.git
+cd porkbun
 pnpm install
 pnpm build
 pnpm link --global

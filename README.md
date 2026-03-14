@@ -2,7 +2,7 @@
 
 CLI and TypeScript SDK for [Porkbun](https://porkbun.com) — manage domains, DNS, SSL and more from the terminal.
 
-[![CI](https://github.com/yabbal/porkbun-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/yabbal/porkbun-cli/actions/workflows/ci.yml)
+[![CI](https://github.com/yabbal/porkbun/actions/workflows/ci.yml/badge.svg)](https://github.com/yabbal/porkbun/actions/workflows/ci.yml)
 [![npm porkbun-cli](https://img.shields.io/npm/v/porkbun-cli?label=porkbun-cli)](https://www.npmjs.com/package/porkbun-cli)
 [![npm porkbun-sdk](https://img.shields.io/npm/v/porkbun-sdk?label=porkbun-sdk)](https://www.npmjs.com/package/porkbun-sdk)
 
@@ -111,13 +111,13 @@ const ssl = await client.ssl.retrieve("example.com");
 Porkbun CLI is designed to work with AI agents. All commands return structured JSON, directly usable by an LLM.
 
 ```bash
-npx skills add yabbal/porkbun-cli
+npx skills add yabbal/porkbun
 ```
 
 ## Monorepo structure
 
 ```
-porkbun-cli/
+porkbun/
 ├── packages/porkbun-sdk/   # TypeScript SDK (published on npm)
 ├── packages/porkbun-cli/   # CLI (published on npm, depends on porkbun-sdk)
 ├── turbo.json              # Turborepo

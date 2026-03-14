@@ -12,7 +12,7 @@ Use when the user asks about Porkbun, domain management, DNS records, SSL certif
 
 ## Pre-requisites
 
-- Install the CLI: `npm install -g porkbun-cli`
+- Install the CLI: `npm install -g porkbun-cli` (or `npx porkbun-cli`)
 - Install the SDK: `npm install porkbun-sdk`
 - Set environment variables:
   ```bash

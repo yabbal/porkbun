@@ -6,8 +6,8 @@ Thanks for your interest in contributing! Contributions are welcome.
 
 ```bash
 # Clone the repo
-git clone https://github.com/yabbal/porkbun-cli.git
-cd porkbun-cli
+git clone https://github.com/yabbal/porkbun.git
+cd porkbun
 
 # Install dependencies
 pnpm install
@@ -19,7 +19,7 @@ pnpm build
 ## Project structure
 
 ```
-porkbun-cli/
+porkbun/
 ├── packages/porkbun-sdk/   # TypeScript SDK (published on npm)
 ├── packages/porkbun-cli/   # CLI tool (published on npm, depends on porkbun-sdk)
 └── turbo.json              # Turborepo config
