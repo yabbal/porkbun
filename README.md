@@ -1,10 +1,12 @@
-# Porkbun CLI
+# Porkbun
 
 CLI and TypeScript SDK for [Porkbun](https://porkbun.com) — manage domains, DNS, SSL and more from the terminal.
 
 [![CI](https://github.com/yabbal/porkbun/actions/workflows/ci.yml/badge.svg)](https://github.com/yabbal/porkbun/actions/workflows/ci.yml)
 [![npm porkbun-cli](https://img.shields.io/npm/v/porkbun-cli?label=porkbun-cli)](https://www.npmjs.com/package/porkbun-cli)
 [![npm porkbun-sdk](https://img.shields.io/npm/v/porkbun-sdk?label=porkbun-sdk)](https://www.npmjs.com/package/porkbun-sdk)
+[![coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/yabbal/52f42c6bc708b76eb2c4d056a79fe2d5/raw/porkbun-coverage.json)](https://github.com/yabbal/porkbun/actions/workflows/ci.yml)
+[![docs](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://yabbal.github.io/porkbun/)
 
 ## Features
 
@@ -114,12 +116,17 @@ Porkbun CLI is designed to work with AI agents. All commands return structured J
 npx skills add yabbal/porkbun
 ```
 
+## Documentation
+
+Full documentation available at **[yabbal.github.io/porkbun](https://yabbal.github.io/porkbun/)**.
+
 ## Monorepo structure
 
 ```
 porkbun/
 ├── packages/porkbun-sdk/   # TypeScript SDK (published on npm)
 ├── packages/porkbun-cli/   # CLI (published on npm, depends on porkbun-sdk)
+├── apps/docs/              # Documentation site (Fumadocs + Next.js)
 ├── turbo.json              # Turborepo
 └── SKILL.md                # Skill for AI agents (skills.sh)
 ```
@@ -130,6 +137,7 @@ porkbun/
 pnpm install              # Install dependencies
 pnpm build                # Build SDK + CLI
 pnpm dev                  # Dev mode
+pnpm test                 # Run tests
 pnpm lint                 # Lint
 ```
 
@@ -142,6 +150,8 @@ pnpm lint                 # Lint
 | [tsup](https://github.com/egoist/tsup) | Build |
 | [Turborepo](https://turbo.build/) | Monorepo |
 | [Biome](https://biomejs.dev/) | Linter & formatter |
+| [Vitest](https://vitest.dev/) | Tests & coverage |
+| [Fumadocs](https://fumadocs.vercel.app/) | Documentation |
 
 ## License
 
