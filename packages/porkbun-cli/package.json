@@ -1,0 +1,57 @@
+{
+	"name": "porkbun-cli",
+	"version": "1.0.0",
+	"description": "CLI for Porkbun — manage domains, DNS, SSL and more from the terminal",
+	"type": "module",
+	"license": "MIT",
+	"author": "yabbal",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/yabbal/porkbun-cli.git",
+		"directory": "packages/porkbun-cli"
+	},
+	"homepage": "https://github.com/yabbal/porkbun-cli",
+	"bugs": {
+		"url": "https://github.com/yabbal/porkbun-cli/issues"
+	},
+	"keywords": [
+		"porkbun",
+		"cli",
+		"domain",
+		"dns",
+		"ssl",
+		"registrar",
+		"nameserver",
+		"dnssec"
+	],
+	"bin": {
+		"porkbun": "./dist/cli.js"
+	},
+	"files": [
+		"dist"
+	],
+	"publishConfig": {
+		"provenance": true,
+		"access": "public"
+	},
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsup --watch",
+		"typecheck": "tsc --noEmit",
+		"lint": "biome check src/",
+		"format": "biome format --write src/"
+	},
+	"dependencies": {
+		"citty": "^0.2.1",
+		"cli-table3": "^0.6.5",
+		"consola": "^3.4.2",
+		"dotenv": "^17.3.1",
+		"porkbun-sdk": "workspace:*"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.0.6",
+		"@types/node": "^22.15.0",
+		"tsup": "^8.5.0",
+		"typescript": "^5.8.3"
+	}
+}

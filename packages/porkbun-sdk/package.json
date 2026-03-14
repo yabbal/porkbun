@@ -1,0 +1,50 @@
+{
+	"name": "porkbun-sdk",
+	"version": "1.0.0",
+	"description": "TypeScript SDK for the Porkbun API — manage domains, DNS, SSL and more",
+	"type": "module",
+	"license": "MIT",
+	"author": "yabbal",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/yabbal/porkbun-cli.git",
+		"directory": "packages/porkbun-sdk"
+	},
+	"homepage": "https://github.com/yabbal/porkbun-cli",
+	"bugs": {
+		"url": "https://github.com/yabbal/porkbun-cli/issues"
+	},
+	"keywords": [
+		"porkbun",
+		"sdk",
+		"api",
+		"domain",
+		"dns",
+		"ssl",
+		"registrar",
+		"typescript"
+	],
+	"exports": {
+		".": {
+			"import": "./dist/index.js",
+			"types": "./dist/index.d.ts"
+		}
+	},
+	"files": ["dist"],
+	"publishConfig": {
+		"provenance": true,
+		"access": "public"
+	},
+	"scripts": {
+		"build": "tsup",
+		"dev": "tsup --watch",
+		"typecheck": "tsc --noEmit",
+		"lint": "biome check src/",
+		"format": "biome format --write src/"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.0.6",
+		"tsup": "^8.5.0",
+		"typescript": "^5.8.3"
+	}
+}
