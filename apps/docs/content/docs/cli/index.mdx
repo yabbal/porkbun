@@ -1,0 +1,53 @@
+---
+title: CLI
+description: Manage Porkbun from the terminal with porkbun-cli
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+
+## Installation
+
+```bash title="Terminal"
+npm install -g porkbun-cli
+```
+
+## Configuration
+
+Set your API keys from [porkbun.com/account/api](https://porkbun.com/account/api):
+
+```bash title="Terminal"
+export PORKBUN_API_KEY=pk1_xxxxx
+export PORKBUN_API_SECRET=sk1_xxxxx
+```
+
+Or use a `.env` file in the working directory.
+
+## Commands
+
+| Command | Description |
+|---------|-------------|
+| `porkbun ping` | Test API authentication |
+| `porkbun pricing` | Get TLD pricing |
+| `porkbun domain` | Manage domains |
+| `porkbun dns` | Manage DNS records |
+| `porkbun dnssec` | Manage DNSSEC records |
+| `porkbun ssl` | Retrieve SSL certificates |
+| `porkbun version` | Show CLI version |
+
+## Output formats
+
+All commands support `--format`:
+
+```bash title="Terminal"
+porkbun domain list --format json     # JSON (default)
+porkbun domain list --format table    # ASCII table
+porkbun domain list --format csv      # CSV
+```
+
+## Dry-run
+
+All write commands support `--dry-run` to preview without executing:
+
+```bash title="Terminal"
+porkbun dns create example.com --type A --content 1.2.3.4 --dry-run
+```

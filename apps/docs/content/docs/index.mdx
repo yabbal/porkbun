@@ -1,0 +1,107 @@
+---
+title: Getting started
+description: Install and configure Porkbun SDK & CLI in minutes
+---
+
+import { Cards, Card } from "fumadocs-ui/components/card";
+import { Steps, Step } from "fumadocs-ui/components/steps";
+import { Tabs, Tab } from "fumadocs-ui/components/tabs";
+import { Terminal, Code, Globe, Shield, KeyRound } from "lucide-react";
+
+Porkbun is a set of TypeScript tools for the [Porkbun](https://porkbun.com) domain registrar:
+
+- **`porkbun-sdk`** — SDK to integrate Porkbun into your applications
+- **`porkbun-cli`** — CLI to manage your domains from the terminal
+
+## Installation
+
+<Tabs items={["SDK TypeScript", "CLI"]}>
+  <Tab value="SDK TypeScript">
+    ```bash title="Terminal"
+    npm install porkbun-sdk
+    ```
+  </Tab>
+  <Tab value="CLI">
+    ```bash title="Terminal"
+    npm install -g porkbun-cli
+    ```
+  </Tab>
+</Tabs>
+
+## Quick start
+
+<Tabs items={["SDK TypeScript", "CLI"]}>
+  <Tab value="SDK TypeScript">
+    <Steps>
+      <Step>
+        ### Set your API keys
+
+        Get your keys from [porkbun.com/account/api](https://porkbun.com/account/api).
+
+        ```bash title="Terminal"
+        export PORKBUN_API_KEY=pk1_xxxxx
+        export PORKBUN_API_SECRET=sk1_xxxxx
+        ```
+      </Step>
+
+      <Step>
+        ### Use the SDK
+
+        ```ts title="app.ts"
+        import { PorkbunClient } from "porkbun-sdk";
+
+        const client = new PorkbunClient({
+          apikey: process.env.PORKBUN_API_KEY!,
+          secretapikey: process.env.PORKBUN_API_SECRET!,
+        });
+
+        const ping = await client.ping();
+        const domains = await client.domain.listAll();
+        const records = await client.dns.retrieve("example.com");
+        ```
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab value="CLI">
+    <Steps>
+      <Step>
+        ### Set your API keys
+
+        ```bash title="Terminal"
+        export PORKBUN_API_KEY=pk1_xxxxx
+        export PORKBUN_API_SECRET=sk1_xxxxx
+        ```
+      </Step>
+
+      <Step>
+        ### Use the CLI
+
+        ```bash title="Terminal"
+        porkbun ping
+        porkbun domain list --format table
+        porkbun dns list example.com
+        ```
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Explore
+
+<Cards>
+  <Card icon={<Code />} title="SDK TypeScript" href="/docs/sdk">
+    Typed client, 5 resources, automatic retry.
+  </Card>
+  <Card icon={<Terminal />} title="CLI" href="/docs/cli">
+    7 commands, JSON/table/CSV output, dry-run support.
+  </Card>
+  <Card icon={<Globe />} title="Domains" href="/docs/cli/domain">
+    List, check, register, nameservers, auto-renew.
+  </Card>
+  <Card icon={<Shield />} title="DNS" href="/docs/cli/dns">
+    Create, edit, delete DNS records.
+  </Card>
+  <Card icon={<KeyRound />} title="SSL" href="/docs/cli/ssl">
+    Retrieve SSL certificate bundles.
+  </Card>
+</Cards>

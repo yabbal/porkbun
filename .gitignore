@@ -2,3 +2,22 @@ node_modules
 dist
 .env
 .turbo
+
+# Next.js (docs)
+.next
+out
+
+# Fumadocs
+.source
+
+# Coverage
+coverage
+
+# OS
+.DS_Store
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo

@@ -20,6 +20,7 @@
 		"typecheck": "turbo typecheck",
 		"lint": "turbo lint",
 		"format": "turbo format",
+		"test": "turbo test",
 		"release": "turbo build && changeset publish",
 		"commit": "cz"
 	},

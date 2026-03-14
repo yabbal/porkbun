@@ -1,0 +1,119 @@
+---
+title: SDK TypeScript
+description: Use porkbun-sdk to manage Porkbun from your TypeScript applications
+---
+
+import { Tabs, Tab } from "fumadocs-ui/components/tabs";
+import { Callout } from "fumadocs-ui/components/callout";
+
+## Installation
+
+```bash title="Terminal"
+npm install porkbun-sdk
+```
+
+## Client
+
+```ts title="app.ts"
+import { PorkbunClient } from "porkbun-sdk";
+
+const client = new PorkbunClient({
+  apikey: "pk1_xxxxx",
+  secretapikey: "sk1_xxxxx",
+});
+```
+
+### Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `apikey` | `string` | — | Porkbun API key (required) |
+| `secretapikey` | `string` | — | Porkbun secret API key (required) |
+| `baseURL` | `string` | `https://api.porkbun.com/api/json/v3` | API base URL |
+| `retry` | `number` | `3` | Number of retry attempts |
+| `retryDelay` | `number` | `1000` | Base delay between retries (ms) |
+
+## Resources
+
+### Ping
+
+```ts
+const result = await client.ping();
+// { status: "SUCCESS", yourIp: "1.2.3.4" }
+```
+
+### Pricing
+
+```ts
+const pricing = await client.pricing.get();
+```
+
+### Domains
+
+```ts
+const domains = await client.domain.listAll();
+const check = await client.domain.check("example.com");
+const ns = await client.domain.getNameServers("example.com");
+```
+
+### DNS
+
+```ts
+const records = await client.dns.retrieve("example.com");
+const created = await client.dns.create("example.com", {
+  type: "A",
+  content: "1.2.3.4",
+  name: "www",
+});
+await client.dns.delete("example.com", "12345");
+```
+
+### DNSSEC
+
+```ts
+const records = await client.dnssec.get("example.com");
+await client.dnssec.create("example.com", {
+  dsData: "...",
+  keyTag: 12345,
+  alg: 13,
+  digestType: 2,
+  digest: "abc123",
+});
+```
+
+### SSL
+
+```ts
+const bundle = await client.ssl.retrieve("example.com");
+// { certificatechain, privatekey, publickey }
+```
+
+## Error handling
+
+```ts
+import { PorkbunError } from "porkbun-sdk";
+
+try {
+  await client.domain.check("example.com");
+} catch (error) {
+  if (error instanceof PorkbunError) {
+    console.error(error.message);    // "HTTP 401"
+    console.error(error.status);     // 401
+    console.error(error.endpoint);   // "/domain/check/example.com"
+    console.error(error.details);    // "Invalid API key"
+  }
+}
+```
+
+## Retry
+
+The SDK automatically retries on 429 and 5xx errors with exponential backoff.
+
+```ts
+const client = new PorkbunClient({
+  apikey: "...",
+  secretapikey: "...",
+  retry: 5,        // 5 attempts
+  retryDelay: 2000, // 2s base delay
+});
+```

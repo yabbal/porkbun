@@ -1,0 +1,56 @@
+---
+title: Domains
+description: List, check, register and manage domains
+---
+
+## List domains
+
+```bash title="Terminal"
+porkbun domain list
+porkbun domain list --format table
+porkbun domain list --labels
+```
+
+## Check availability
+
+```bash title="Terminal"
+porkbun domain check example.com
+```
+
+## Register a domain
+
+```bash title="Terminal"
+porkbun domain create example.com --cost 1108
+porkbun domain create example.com --cost 1108 --dry-run
+```
+
+## Name servers
+
+```bash title="Terminal"
+porkbun domain ns get example.com
+porkbun domain ns update example.com --ns "ns1.dns.com,ns2.dns.com"
+```
+
+## Auto-renew
+
+```bash title="Terminal"
+porkbun domain auto-renew example.com --status on
+porkbun domain auto-renew example.com --status off
+```
+
+## URL forwarding
+
+```bash title="Terminal"
+porkbun domain forward list example.com
+porkbun domain forward add example.com --location "https://target.com" --type permanent
+porkbun domain forward delete example.com --id 12345
+```
+
+## Glue records
+
+```bash title="Terminal"
+porkbun domain glue list example.com
+porkbun domain glue create example.com --subdomain ns1 --ips "1.2.3.4,5.6.7.8"
+porkbun domain glue update example.com --subdomain ns1 --ips "9.10.11.12"
+porkbun domain glue delete example.com --subdomain ns1
+```

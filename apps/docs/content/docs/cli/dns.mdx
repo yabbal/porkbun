@@ -1,0 +1,36 @@
+---
+title: DNS
+description: Create, edit and delete DNS records
+---
+
+## List records
+
+```bash title="Terminal"
+porkbun dns list example.com
+porkbun dns list example.com --type A
+porkbun dns list example.com --type TXT --subdomain _dmarc
+porkbun dns list example.com --format table
+```
+
+## Create a record
+
+```bash title="Terminal"
+porkbun dns create example.com --type A --content 1.2.3.4
+porkbun dns create example.com --type A --content 1.2.3.4 --name www --ttl 3600
+porkbun dns create example.com --type MX --content mail.example.com --prio 10
+porkbun dns create example.com --type TXT --content "v=spf1 include:_spf.google.com ~all"
+```
+
+## Edit a record
+
+```bash title="Terminal"
+porkbun dns edit example.com --id 12345 --type A --content 5.6.7.8
+porkbun dns edit-by-name-type example.com --type A --subdomain www --content 5.6.7.8
+```
+
+## Delete a record
+
+```bash title="Terminal"
+porkbun dns delete example.com --id 12345
+porkbun dns delete-by-name-type example.com --type A --subdomain www
+```
