@@ -94,6 +94,11 @@ describe("output", () => {
 			expect(written).toContain("alice");
 		});
 
+		it("should display info message for empty array", () => {
+			output([], { format: "table" });
+			expect(logSpy).not.toHaveBeenCalled();
+		});
+
 		it("should use custom getter in columns", () => {
 			const data = [{ status: true }];
 			output(data, {

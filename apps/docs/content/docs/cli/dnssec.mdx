@@ -3,20 +3,74 @@ title: DNSSEC
 description: Manage DNSSEC DS records
 ---
 
+import { Callout } from "fumadocs-ui/components/callout";
+
+<Callout type="warn">
+  DNSSEC records are managed at the registry level. Incorrect configuration can make your domain unresolvable.
+</Callout>
+
 ## List records
 
 ```bash title="Terminal"
 porkbun dnssec list example.com
+porkbun dnssec list example.com --format table
 ```
+
+Returns all DS (Delegation Signer) records for the domain.
 
 ## Create a record
 
 ```bash title="Terminal"
-porkbun dnssec create example.com --key-tag 12345 --alg 13 --digest-type 2 --digest abc123
+porkbun dnssec create example.com \
+  --key-tag 12345 \
+  --alg 13 \
+  --digest-type 2 \
+  --digest abc123def456
+```
+
+### Parameters
+
+| Parameter | Description |
+|-----------|-------------|
+| `--key-tag` | Key tag (numeric identifier) |
+| `--alg` | Algorithm number (e.g. 13 = ECDSAP256SHA256) |
+| `--digest-type` | Digest type (e.g. 2 = SHA-256) |
+| `--digest` | Digest value (hex string) |
+
+### Common algorithms
+
+| Number | Algorithm |
+|--------|-----------|
+| 8 | RSA/SHA-256 |
+| 13 | ECDSA P-256/SHA-256 |
+| 14 | ECDSA P-384/SHA-384 |
+| 15 | Ed25519 |
+
+### Preview before creating
+
+```bash title="Terminal"
+porkbun dnssec create example.com \
+  --key-tag 12345 --alg 13 --digest-type 2 --digest abc123 \
+  --dry-run
 ```
 
 ## Delete a record
 
 ```bash title="Terminal"
 porkbun dnssec delete example.com --key-tag 12345
+porkbun dnssec delete example.com --key-tag 12345 --dry-run
+```
+
+## Examples
+
+### List all DNSSEC key tags
+
+```bash title="Terminal"
+porkbun dnssec list example.com | jq '.[].keyTag'
+```
+
+### Check if DNSSEC is configured
+
+```bash title="Terminal"
+porkbun dnssec list example.com | jq 'length'
 ```

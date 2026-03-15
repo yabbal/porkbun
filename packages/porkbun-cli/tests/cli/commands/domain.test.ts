@@ -305,6 +305,21 @@ describe("domain forward", () => {
 
 			expect(mockOutput).toHaveBeenCalledWith(result, expect.objectContaining({ format: "json" }));
 		});
+
+		it("should call outputError on failure", async () => {
+			const error = new Error("fail");
+			const mockClient = {
+				domain: { getUrlForwarding: vi.fn().mockRejectedValue(error) },
+			};
+			mockGetClient.mockReturnValue(mockClient);
+
+			await listCmd.run!({
+				args: { domain: "example.com", format: "json" },
+				rawArgs: [],
+				cmd: listCmd,
+			} as any);
+			expect(mockOutputError).toHaveBeenCalledWith(error);
+		});
 	});
 
 	describe("forward add", () => {
@@ -387,6 +402,29 @@ describe("domain forward", () => {
 
 			expect(mockOutput).toHaveBeenCalledWith(expect.objectContaining({ dry_run: true }));
 		});
+
+		it("should call outputError on failure", async () => {
+			const error = new Error("fail");
+			const mockClient = {
+				domain: { addUrlForward: vi.fn().mockRejectedValue(error) },
+			};
+			mockGetClient.mockReturnValue(mockClient);
+
+			await addCmd.run!({
+				args: {
+					domain: "example.com",
+					location: "https://target.com",
+					type: "permanent",
+					"include-path": "no",
+					wildcard: "no",
+					"dry-run": false,
+					format: "json",
+				},
+				rawArgs: [],
+				cmd: addCmd,
+			} as any);
+			expect(mockOutputError).toHaveBeenCalledWith(error);
+		});
 	});
 
 	describe("forward delete", () => {
@@ -421,6 +459,21 @@ describe("domain forward", () => {
 				action: "delete_url_forward",
 				recordId: "123",
 			});
+		});
+
+		it("should call outputError on failure", async () => {
+			const error = new Error("fail");
+			const mockClient = {
+				domain: { deleteUrlForward: vi.fn().mockRejectedValue(error) },
+			};
+			mockGetClient.mockReturnValue(mockClient);
+
+			await deleteCmd.run!({
+				args: { domain: "example.com", id: "123", "dry-run": false, format: "json" },
+				rawArgs: [],
+				cmd: deleteCmd,
+			} as any);
+			expect(mockOutputError).toHaveBeenCalledWith(error);
 		});
 	});
 });
@@ -463,6 +516,21 @@ describe("domain glue", () => {
 			} as any);
 
 			expect(mockOutput).toHaveBeenCalledWith([], expect.anything());
+		});
+
+		it("should call outputError on failure", async () => {
+			const error = new Error("fail");
+			const mockClient = {
+				domain: { getGlueRecords: vi.fn().mockRejectedValue(error) },
+			};
+			mockGetClient.mockReturnValue(mockClient);
+
+			await listCmd.run!({
+				args: { domain: "example.com", format: "json" },
+				rawArgs: [],
+				cmd: listCmd,
+			} as any);
+			expect(mockOutputError).toHaveBeenCalledWith(error);
 		});
 	});
 
@@ -515,6 +583,27 @@ describe("domain glue", () => {
 				payload: { ips: ["1.2.3.4"] },
 			});
 		});
+
+		it("should call outputError on failure", async () => {
+			const error = new Error("fail");
+			const mockClient = {
+				domain: { createGlueRecord: vi.fn().mockRejectedValue(error) },
+			};
+			mockGetClient.mockReturnValue(mockClient);
+
+			await createCmd.run!({
+				args: {
+					domain: "example.com",
+					subdomain: "ns1",
+					ips: "1.2.3.4",
+					"dry-run": false,
+					format: "json",
+				},
+				rawArgs: [],
+				cmd: createCmd,
+			} as any);
+			expect(mockOutputError).toHaveBeenCalledWith(error);
+		});
 	});
 
 	describe("glue update", () => {
@@ -561,6 +650,27 @@ describe("domain glue", () => {
 
 			expect(mockOutput).toHaveBeenCalledWith(expect.objectContaining({ dry_run: true }));
 		});
+
+		it("should call outputError on failure", async () => {
+			const error = new Error("fail");
+			const mockClient = {
+				domain: { updateGlueRecord: vi.fn().mockRejectedValue(error) },
+			};
+			mockGetClient.mockReturnValue(mockClient);
+
+			await updateCmd.run!({
+				args: {
+					domain: "example.com",
+					subdomain: "ns1",
+					ips: "1.2.3.4",
+					"dry-run": false,
+					format: "json",
+				},
+				rawArgs: [],
+				cmd: updateCmd,
+			} as any);
+			expect(mockOutputError).toHaveBeenCalledWith(error);
+		});
 	});
 
 	describe("glue delete", () => {
@@ -595,6 +705,21 @@ describe("domain glue", () => {
 				action: "delete_glue_record",
 				subdomain: "ns1",
 			});
+		});
+
+		it("should call outputError on failure", async () => {
+			const error = new Error("fail");
+			const mockClient = {
+				domain: { deleteGlueRecord: vi.fn().mockRejectedValue(error) },
+			};
+			mockGetClient.mockReturnValue(mockClient);
+
+			await deleteCmd.run!({
+				args: { domain: "example.com", subdomain: "ns1", "dry-run": false, format: "json" },
+				rawArgs: [],
+				cmd: deleteCmd,
+			} as any);
+			expect(mockOutputError).toHaveBeenCalledWith(error);
 		});
 	});
 });

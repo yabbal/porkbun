@@ -3,6 +3,8 @@ title: SSL
 description: Retrieve SSL certificate bundles
 ---
 
+import { Callout } from "fumadocs-ui/components/callout";
+
 ## Retrieve certificate
 
 ```bash title="Terminal"
@@ -10,3 +12,48 @@ porkbun ssl example.com
 ```
 
 Returns the full SSL bundle including certificate chain, private key, and public key.
+
+<Callout type="info">
+  SSL certificates are only available for domains using Porkbun nameservers with Let's Encrypt auto-provisioning enabled.
+</Callout>
+
+## Output
+
+The response contains three fields:
+
+| Field | Description |
+|-------|-------------|
+| `certificatechain` | Full certificate chain (PEM format) |
+| `privatekey` | RSA private key (PEM format) |
+| `publickey` | Public key (PEM format) |
+
+## Output formats
+
+```bash title="Terminal"
+porkbun ssl example.com                  # JSON (default)
+porkbun ssl example.com --format table   # Table
+porkbun ssl example.com --format csv     # CSV
+```
+
+## Examples
+
+### Save certificate files
+
+```bash title="Terminal"
+porkbun ssl example.com | jq -r '.certificatechain' > fullchain.pem
+porkbun ssl example.com | jq -r '.privatekey' > privkey.pem
+```
+
+### Check certificate expiry
+
+```bash title="Terminal"
+porkbun ssl example.com | jq -r '.certificatechain' | openssl x509 -noout -enddate
+```
+
+### Use with nginx
+
+```bash title="Terminal"
+porkbun ssl example.com | jq -r '.certificatechain' > /etc/nginx/ssl/fullchain.pem
+porkbun ssl example.com | jq -r '.privatekey' > /etc/nginx/ssl/privkey.pem
+nginx -s reload
+```

@@ -1,0 +1,147 @@
+---
+title: AI Skill
+description: Use Porkbun CLI as an AI agent skill for Claude Code and other AI assistants
+---
+
+import { Callout } from "fumadocs-ui/components/callout";
+import { Steps, Step } from "fumadocs-ui/components/steps";
+
+Porkbun CLI can be used as an **AI agent skill**, enabling AI assistants like [Claude Code](https://claude.com/claude-code) to manage your domains, DNS records, SSL certificates and more through natural language.
+
+## What is a skill?
+
+A skill is a capability that an AI agent can invoke to perform specialized tasks. The Porkbun skill allows AI assistants to run CLI commands on your behalf when you ask about domain management, DNS configuration, SSL certificates, etc.
+
+<Callout type="info">
+  The skill file (`SKILL.md`) is included at the root of the project and is automatically detected by compatible AI agents.
+</Callout>
+
+## Setup
+
+<Steps>
+  <Step>
+    ### Install the CLI
+
+    ```bash title="Terminal"
+    npm install -g porkbun-cli
+    ```
+  </Step>
+
+  <Step>
+    ### Configure API keys
+
+    ```bash title="Terminal"
+    export PORKBUN_API_KEY=pk1_xxxxx
+    export PORKBUN_API_SECRET=sk1_xxxxx
+    ```
+  </Step>
+
+  <Step>
+    ### Install the skill (Claude Code)
+
+    ```bash title="Terminal"
+    claude skills add /path/to/porkbun
+    ```
+
+    Or if the project is already in your working directory, Claude Code will detect the `SKILL.md` automatically.
+  </Step>
+</Steps>
+
+## Trigger phrases
+
+The skill activates when you mention any of these topics:
+
+- `porkbun`, `domain`, `dns`, `nameservers`
+- `ssl certificate`, `domain availability`, `register domain`
+- `dns records`, `url forwarding`, `glue records`
+- `dnssec`, `domain pricing`, `check domain`, `manage domains`
+
+## Example prompts
+
+### Domain management
+
+```
+List all my Porkbun domains
+Check if coolstartup.dev is available
+Register coolstartup.dev if it costs less than $15
+Enable auto-renew on example.com
+```
+
+### DNS configuration
+
+```
+Show all DNS records for example.com
+Add an A record pointing example.com to 76.76.21.21
+Create a CNAME record for www.example.com pointing to cname.vercel-dns.com
+Delete all TXT records on the subdomain _dmarc.example.com
+```
+
+### SSL & security
+
+```
+Get the SSL certificate for example.com
+List DNSSEC records for example.com
+```
+
+### URL forwarding
+
+```
+Set up a permanent redirect from old-domain.com to new-domain.com
+List all URL forwards for example.com
+```
+
+## How it works
+
+When the AI agent receives a domain-related request, it:
+
+1. Matches the request to the appropriate `porkbun` CLI command
+2. Uses `--dry-run` for write operations to preview changes first
+3. Executes the command and parses the JSON output
+4. Presents the results in a human-readable format
+
+<Callout type="warn">
+  Write operations (create, edit, delete) will typically use `--dry-run` first and ask for confirmation before executing.
+</Callout>
+
+## Output formats
+
+The skill uses JSON output by default for reliable parsing, but you can ask for other formats:
+
+```
+Show my domains as a table
+Export my DNS records as CSV
+```
+
+## Supported commands
+
+All CLI commands are available through the skill:
+
+| Command | What you can ask |
+|---------|-----------------|
+| `ping` | "Test my Porkbun connection" |
+| `pricing` | "How much does a .dev domain cost?" |
+| `domain list` | "List all my domains" |
+| `domain check` | "Is example.com available?" |
+| `domain create` | "Register example.com" |
+| `domain ns` | "What are the nameservers for example.com?" |
+| `domain auto-renew` | "Enable auto-renew on example.com" |
+| `domain forward` | "Set up URL forwarding for example.com" |
+| `domain glue` | "Manage glue records for example.com" |
+| `dns list` | "Show DNS records for example.com" |
+| `dns create` | "Add an A record for example.com" |
+| `dns edit` | "Update the A record for www.example.com" |
+| `dns delete` | "Remove the TXT record with ID 12345" |
+| `dnssec list` | "Show DNSSEC records for example.com" |
+| `dnssec create` | "Add a DNSSEC record for example.com" |
+| `dnssec delete` | "Remove DNSSEC record with keytag 12345" |
+| `ssl` | "Get the SSL certificate for example.com" |
+
+## jq integration
+
+The AI agent can combine commands with `jq` for advanced queries:
+
+```
+Which of my domains don't have auto-renew enabled?
+How many A records does example.com have?
+Show me all domains expiring this month
+```

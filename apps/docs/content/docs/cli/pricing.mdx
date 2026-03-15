@@ -10,6 +10,8 @@ porkbun pricing
 porkbun pricing --format table
 ```
 
+Returns registration, renewal, and transfer prices for all supported TLDs.
+
 ## Specific TLD
 
 ```bash title="Terminal"
@@ -17,9 +19,37 @@ porkbun pricing --tld com
 porkbun pricing --tld dev --format table
 ```
 
-## Combine with jq
+## Output fields
+
+| Field | Description |
+|-------|-------------|
+| `registration` | Price to register (USD) |
+| `renewal` | Price to renew (USD) |
+| `transfer` | Price to transfer (USD) |
+| `coupons` | Active coupon codes |
+
+## Examples
+
+### Get price for a specific TLD
 
 ```bash title="Terminal"
-porkbun pricing | jq '.pricing.com'
+porkbun pricing --tld com | jq '.pricing.com'
+```
+
+### Find cheapest TLDs
+
+```bash title="Terminal"
+porkbun pricing | jq '[.pricing | to_entries[] | {tld: .key, price: (.value.registration | tonumber)}] | sort_by(.price) | .[:10]'
+```
+
+### Count TLDs under $10/year
+
+```bash title="Terminal"
 porkbun pricing | jq '[.pricing | to_entries[] | select(.value.registration | tonumber < 10)] | length'
+```
+
+### Compare registration vs renewal price
+
+```bash title="Terminal"
+porkbun pricing --tld dev | jq '.pricing.dev | {registration, renewal}'
 ```
