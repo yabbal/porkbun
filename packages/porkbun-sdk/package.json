@@ -1,6 +1,6 @@
 {
 	"name": "porkbun-sdk",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "TypeScript SDK for the Porkbun API — manage domains, DNS, SSL and more",
 	"type": "module",
 	"license": "MIT",

@@ -1,6 +1,6 @@
 {
 	"name": "porkbun-cli",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "CLI for Porkbun — manage domains, DNS, SSL and more from the terminal",
 	"type": "module",
 	"license": "MIT",
