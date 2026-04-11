@@ -8,14 +8,14 @@
 		"start": "next start"
 	},
 	"dependencies": {
-		"fumadocs-core": "^16.6.13",
-		"fumadocs-mdx": "^14.2.9",
-		"fumadocs-ui": "^16.6.13",
-		"lucide-react": "^0.577.0",
+		"fumadocs-core": "^16.7.11",
+		"fumadocs-mdx": "^14.2.11",
+		"fumadocs-ui": "^16.7.11",
+		"lucide-react": "^1.8.0",
 		"porkbun-cli": "workspace:*",
-		"next": "^16.1.6",
-		"react": "^19.1.0",
-		"react-dom": "^19.1.0"
+		"next": "^16.2.3",
+		"react": "^19.2.5",
+		"react-dom": "^19.2.5"
 	},
 	"devDependencies": {
 		"@tailwindcss/postcss": "^4.2.1",
