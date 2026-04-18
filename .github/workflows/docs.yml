@@ -33,7 +33,7 @@ jobs:
       - run: pnpm --filter docs build
         env:
           BASE_PATH: /porkbun
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: apps/docs/out
 
